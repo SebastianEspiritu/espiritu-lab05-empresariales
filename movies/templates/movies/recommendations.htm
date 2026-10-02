@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recomendaciones de Películas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f4f9; }
+        h1 { color: #333; }
+        .movie-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .badge { background: #007bff; color: white; padding: 3px 8px; border-radius: 3px; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <h1>🎬 Películas Mejor Valoradas</h1>
+    <form method="get">
+        <label for="genre">Filtrar por Género:</label>
+        <select name="genre" id="genre" onchange="this.form.submit()">
+            <option value="">Todos los géneros</option>
+            {% for genre in genres %}
+                <option value="{{ genre.id }}" {% if selected_genre == genre.id|stringformat:"i" %}selected{% endif %}>
+                    {{ genre.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+    <hr>
+    {% for movie in movies %}
+        <div class="movie-card">
+            <h2>{{ movie.title }} ({{ movie.release_year }})</h2>
+            <p><strong>Promedio de Calificación:</strong> ⭐ {{ movie.avg_rating|default:"Sin calificaciones" }} / 5</p>
+            <p>{{ movie.synopsis }}</p>
+            <p><strong>Géneros:</strong> 
+                {% for g in movie.genres.all %}
+                    <span class="badge">{{ g.name }}</span>
+                {% endfor %}
+            </p>
+        </div>
+    {% empty %}
+        <p>No hay películas recomendadas disponibles.</p>
+    {% endfor %}
+</body>
+</html>
