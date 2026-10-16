@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">EL MUNDO, EN PERSPECTIVA</p><h1>Ideas, imágenes<br>y nuevas historias<span>.</span></h1><p>Una selección de lo que está moviendo la cultura.</p></div>
+<div class="section-heading"><h2>Últimas noticias</h2><span>LECTURAS PARA DESCUBRIR</span></div>
+<div class="article-grid">{% for article in articles %}{% include 'news/_article_card.html' with article=article only %}{% empty %}<p class="empty">Aún no hay noticias publicadas. Vuelve pronto.</p>{% endfor %}</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Espíritu · Diario cultural{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'news/site.css' %}">
+</head>
+<body>
+    <a class="skip" href="#content">Saltar al contenido</a>
+    <header class="masthead">
+        <div class="topline"><span>UNA MIRADA AL CINE Y LA CULTURA</span><span>LIMA, PERÚ</span></div>
+        <a class="brand" href="{% url 'news:home' %}">espíritu<span>DIARIO CULTURAL</span></a>
+        <nav aria-label="Navegación principal">
+            <a href="{% url 'news:home' %}">Portada</a>
+            {% for section in categories %}<a href="{% url 'news:category' section.slug %}" {% if section == category %}aria-current="page"{% endif %}>{{ section.name }}</a>{% endfor %}
+            <a href="{% url 'recommendations' %}">Películas</a>
+            <a href="{% url 'admin:index' %}">Administrar ↗</a>
+        </nav>
+    </header>
+    <div class="layout">
+        <main id="content">{% block content %}{% endblock %}</main>
+        <aside>{% block sidebar %}
+            <p class="eyebrow">EL DIARIO</p><h2>Historias que merecen contarse.</h2>
+            <p>Cine, tecnología y cultura desde una mirada curiosa. Explora nuestras secciones.</p>
+            <ul class="sections">{% for section in categories %}<li><a href="{% url 'news:category' section.slug %}">{{ section.name }} <span>↗</span></a></li>{% empty %}<li>Pronto habrá nuevas secciones.</li>{% endfor %}</ul>
+            <div class="note"><p class="eyebrow">TAMBIÉN EN ESPÍRITU</p><h3>Tu próxima película empieza aquí.</h3><a href="{% url 'recommendations' %}">Explorar recomendaciones →</a></div>
+        {% endblock %}</aside>
+    </div>
+    <footer><strong>espíritu.</strong><span>Laboratorio 06 · Motor de plantillas con Django</span><a href="{% url 'news:home' %}">Volver a la portada ↑</a></footer>
+</body>
+</html>

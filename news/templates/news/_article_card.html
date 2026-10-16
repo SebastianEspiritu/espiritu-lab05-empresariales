@@ -1,0 +1,9 @@
+<article class="card">
+    <a class="image-link" href="{% url 'news:detail' article.slug %}">
+        {% if article.featured_image %}<img src="{{ article.featured_image.url }}" alt="{{ article.image_description|default:article.title }}" loading="lazy" width="960" height="600">{% else %}<div class="image-placeholder">espíritu.</div>{% endif %}
+    </a>
+    <div class="meta">{% for section in article.categories.all %}<a href="{% url 'news:category' section.slug %}">{{ section.name }}</a>{% endfor %}<time datetime="{{ article.published_at|date:'c' }}">{{ article.published_at|date:'d M Y' }}</time></div>
+    <h2><a href="{% url 'news:detail' article.slug %}">{{ article.title }}</a></h2>
+    <p>{{ article.summary|truncatewords:24 }}</p>
+    <div class="byline">Por {{ article.author.name }} <a href="{% url 'news:detail' article.slug %}" aria-label="Leer: {{ article.title }}">Leer historia →</a></div>
+</article>

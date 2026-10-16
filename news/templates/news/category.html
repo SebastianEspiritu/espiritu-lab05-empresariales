@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}{{ category.name }} · Espíritu{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">EXPLORA LA SECCIÓN</p><h1>{{ category.name }}<span>.</span></h1><p>{{ category.description }}</p></div>
+<div class="article-grid">{% for article in articles %}{% include 'news/_article_card.html' with article=article only %}{% empty %}<p class="empty">Todavía no hay noticias publicadas en esta categoría.</p>{% endfor %}</div>
+{% endblock %}

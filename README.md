@@ -1,4 +1,8 @@
-# Laboratorio 05: Administrador con Django
+# Laboratorios 05 y 06: Django
+
+El proyecto incorpora ahora el portal de noticias del laboratorio 06 y conserva la aplicación de películas del laboratorio 05. Consulta [la guía de ejecución, requisitos, pruebas y evidencias del laboratorio 06](docs/LAB06.md).
+
+Para ejecutar, instala `requirements.txt`, aplica `migrate`, ejecuta `seed_news` y arranca `runserver` con el Python del entorno virtual. La portada está en `http://127.0.0.1:8000/`.
 
 **Curso:** Desarrollo de Aplicaciones Empresariales (4-C24-A)  
 **Institución:** Tecsup  

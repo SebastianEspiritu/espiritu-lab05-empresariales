@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }} · Espíritu{% endblock %}
+{% block content %}
+<article class="story">
+    <a class="back" href="{% url 'news:home' %}">← Volver a la portada</a>
+    <div class="meta">{% for section in article.categories.all %}<a href="{% url 'news:category' section.slug %}">{{ section.name }}</a>{% endfor %}<time datetime="{{ article.published_at|date:'c' }}">{{ article.published_at|date:'d F Y' }}</time></div>
+    <h1>{{ article.title }}</h1><p class="lead">{{ article.summary }}</p>
+    <p class="author">Por <strong>{{ article.author.name }}</strong></p>
+    {% if article.featured_image %}<figure><img src="{{ article.featured_image.url }}" alt="{{ article.image_description|default:article.title }}"><figcaption>{{ article.image_description }}</figcaption></figure>{% endif %}
+    <div class="story-body">{{ article.body|linebreaksbr }}</div>
+    <div class="author-box"><p class="eyebrow">SOBRE QUIEN ESCRIBE</p><h2>{{ article.author.name }}</h2><p>{{ article.author.biography }}</p></div>
+</article>
+{% endblock %}

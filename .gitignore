@@ -149,6 +149,8 @@ activemq-data/
 
 # Environments
 .env
+.local-secret-key
+media/news/
 .envrc
 .venv
 env/
